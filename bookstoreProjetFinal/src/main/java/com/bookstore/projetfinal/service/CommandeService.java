@@ -1,5 +1,4 @@
 package com.bookstore.projetfinal.service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +34,7 @@ public class CommandeService {
 	
 	@Autowired
 	LivreRepository livreRepo;
+	
 	
 	// GET all commande 
 	public List<Commande> findAll() {
@@ -99,7 +99,6 @@ public class CommandeService {
 		
 		return commandeRepo.findByClient(optC.get());
 	}
-
 	
 	
 	private void checkQuantites(Commande c) throws InvalidQuantityException, EntityNotFoundException {
