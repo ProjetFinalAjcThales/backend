@@ -32,7 +32,7 @@ public class LivreController {
 	@Autowired
 	LivreService ls;
 
-	//methode pour consulter l'ensemble des livres
+	//methode pour consulter l'ensemble des livres/
 	@GetMapping
 	private List<Livre> consulterLesLivre() {
 		return ls.getAllLivres();
