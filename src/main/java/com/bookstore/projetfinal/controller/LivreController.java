@@ -38,7 +38,7 @@ public class LivreController {
 		return ls.getAllLivres();
 	}
 	
-	//pour acceder à un livre par son identifiant
+	//pour acceder à un livre par son identifiant et acces à l'objet livre
 	@GetMapping("/{id}")
 	private Livre getLivreById(@PathVariable Integer id) {
 		return ls.getLivreById(id).orElseThrow(
