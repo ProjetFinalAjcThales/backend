@@ -6,11 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bookstore.projetfinal.model.Auteur;
 import com.bookstore.projetfinal.repository.AuteurRepository;
 
+@Service
 public class AuteurService {
 	@Autowired
 	AuteurRepository ar;
