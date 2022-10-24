@@ -2,6 +2,7 @@ package com.bookstore.projetfinal.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -9,6 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@Entity
 @SequenceGenerator(name = "genre_gen", sequenceName = "genre_seq", initialValue = 100, allocationSize = 1)
 public class Genre {
         @Id

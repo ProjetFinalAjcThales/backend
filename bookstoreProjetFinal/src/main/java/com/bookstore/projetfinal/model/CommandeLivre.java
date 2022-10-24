@@ -1,6 +1,7 @@
 package com.bookstore.projetfinal.model;
 
-import javax.persistence.Embedded;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class CommandeLivre {
-        @Embedded
+		@EmbeddedId
          CommandeLivreId id;
         
         @ManyToOne
