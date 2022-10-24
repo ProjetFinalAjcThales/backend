@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="auteur")
@@ -23,6 +26,16 @@ public class Auteur {
 	
 	
 	private String prenom;
+	
+	
+	@Version
+	private int version;
+	
+	private String img;
+	
+	@OneToMany(mappedBy = "auteur")
+	@JsonIgnoreProperties({"auteur","genre"})
+	private List<Livre> livres; 
 	
 		
 	public Auteur() {}
@@ -77,11 +90,17 @@ public class Auteur {
 		this.livres = livres;
 	}
 
-	private String img;
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	
-	@OneToMany(mappedBy = "auteur")
 	
-	private List<Livre> livres; 
+
+	
 	
 		
 
