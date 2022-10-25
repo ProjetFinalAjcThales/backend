@@ -1,10 +1,14 @@
 package com.bookstore.projetfinal.model.security;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+
+
 
 import com.bookstore.projetfinal.model.Client;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,7 +26,7 @@ public class Utilisateur {
         @OneToOne(mappedBy = "utilisateur")
         @JsonIgnoreProperties("utilisateur")
         private Client client;
-  
+        //private List<Role> roles;
         
         
 		public Utilisateur() {
@@ -89,7 +93,13 @@ public class Utilisateur {
 		public void setClient(Client client) {
 			this.client = client;
 		}
-
+		
+		/*public UserDetails toUserDetails() {
+			List<GrantedAuthority> auths = roles.stream().map(Role::name)// transformation en String (role -> role.name())
+					.map(SimpleGrantedAuthority::new)// transformation en objet (name -> new SimpleGrantedAuthority(name))
+					.collect(Collectors.toList());
+			return new User(this.mail, this.mdp, auths);
+		}*/
 		/*
 		 * public UserDetails toUserDetails() { System.out.println("toUserDetails");
 		 * return new User(mail, mdp, new ArrayList<>()); }

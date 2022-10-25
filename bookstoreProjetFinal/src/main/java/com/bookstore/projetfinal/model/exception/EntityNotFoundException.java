@@ -5,14 +5,17 @@ import java.util.function.Supplier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-
-
 /*
  * Une classe pour gérer les exceptions sur les entités qui n'existe pas et créer les response status exception 
  */
 public class EntityNotFoundException extends Exception  implements ResponsableException {
-	
-	private static final long serialVersionUID = 7353242889498427394L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4906597582996324768L;
+
+
 	private Object id;
 	private Class<?> origin;
 

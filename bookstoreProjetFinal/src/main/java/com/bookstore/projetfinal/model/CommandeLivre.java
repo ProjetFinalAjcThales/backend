@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class CommandeLivre {
-        @EmbeddedId
+
+		@EmbeddedId
+
          CommandeLivreId id;
         
         @ManyToOne
@@ -73,12 +75,10 @@ public class CommandeLivre {
 			this.qte = qte;
 		}
         
-
 		@Override
 		public String toString() {
 			return "CommandeLivre [id=" + id + ", commande=" + commande + ", livre=" + livre + ", qte=" + qte + "]";
 		}
-
 
 		public void generateId() {
 			this.id = new CommandeLivreId(this.livre.getId(),this.commande.getId());
