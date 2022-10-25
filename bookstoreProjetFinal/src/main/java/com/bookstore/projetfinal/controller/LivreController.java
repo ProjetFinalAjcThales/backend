@@ -1,6 +1,7 @@
 package com.bookstore.projetfinal.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.management.relation.RelationException;
 
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bookstore.projetfinal.model.Livre;
 import com.bookstore.projetfinal.service.LivreService;
+
+
 
 
 
@@ -34,8 +38,12 @@ public class LivreController {
 
 	//methode pour consulter l'ensemble des livres/
 	@GetMapping
-	private List<Livre> consulterLesLivre() {
+	private List<Livre> consulterLesLivre(@RequestParam(required=false) String sortBy) {
+		//if(Objects.isNull(sortBy))
 		return ls.getAllLivres();
+		
+//		else
+//			return ls.getLivresSortBy(sortBy);
 	}
 	
 	//pour acceder à un livre par son identifiant et acces à l'objet livre
@@ -71,7 +79,7 @@ public class LivreController {
 		}
 	}
 	
-	
+	//mise a jour d'un livre en base 
 	@PutMapping
 	//@ResponseStatus(HttpStatus.ACCEPTED)
 	public Livre modifierLivre(@RequestBody Livre livre) {
@@ -81,5 +89,7 @@ public class LivreController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
+	
+	
 
 }

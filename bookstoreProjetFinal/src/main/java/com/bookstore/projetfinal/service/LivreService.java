@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.management.relation.RelationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +17,10 @@ import com.bookstore.projetfinal.model.Auteur;
 import com.bookstore.projetfinal.model.Genre;
 import com.bookstore.projetfinal.model.Livre;
 import com.bookstore.projetfinal.repository.LivreRepository;
+
+
+
+
 
 
 
@@ -93,6 +98,22 @@ public class LivreService {
 
 	}
 	
+	public List<Livre> getLivresSortBy(String paramClassement){
+		String param = "";
+		switch (paramClassement) {
+		case "genre":
+			param = "genre";
+			break;
+		case "auteur":
+			param = "auteur";
+		break;
+		
+		default:
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paramètre de tri inconnu");
+		}
+		Sort s = Sort.by(Sort.Direction.ASC,param) ;
+		return lr.findAll(s);
+	}
 	
 
 	//ici on a les verifications qu'on fait avant insertion en base
