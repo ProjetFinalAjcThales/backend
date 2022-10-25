@@ -21,7 +21,7 @@ public class Genre {
         
         
         @OneToMany(mappedBy="genre")
-        @JsonIgnoreProperties("genre")
+        @JsonIgnoreProperties({"genre","auteur"})
         private List<Livre> livres;
 
         
