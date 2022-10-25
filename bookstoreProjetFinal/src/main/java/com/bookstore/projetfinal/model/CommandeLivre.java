@@ -1,6 +1,5 @@
 package com.bookstore.projetfinal.model;
 
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -10,9 +9,12 @@ import javax.persistence.MapsId;
 import com.bookstore.projetfinal.model.embeddedId.CommandeLivreId;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
 public class CommandeLivre {
+
 		@EmbeddedId
+
          CommandeLivreId id;
         
         @ManyToOne
@@ -29,13 +31,10 @@ public class CommandeLivre {
         private Livre livre;
         
         private Integer qte;
-
-        
         
 		public CommandeLivre() {}
 		
 		
-
 		public CommandeLivre(CommandeLivreId id, Commande commande, Livre livre, Integer qte) {
 			this.id = id;
 			this.commande = commande;
@@ -76,6 +75,13 @@ public class CommandeLivre {
 			this.qte = qte;
 		}
         
+		@Override
+		public String toString() {
+			return "CommandeLivre [id=" + id + ", commande=" + commande + ", livre=" + livre + ", qte=" + qte + "]";
+		}
 
+		public void generateId() {
+			this.id = new CommandeLivreId(this.livre.getId(),this.commande.getId());
+		}
         
 }

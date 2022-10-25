@@ -31,12 +31,12 @@ import com.bookstore.projetfinal.service.UtilisateurService;
 @RequestMapping("/utilisateur")
 @CrossOrigin
 public class UtilisateurController {
+		
+	@Autowired
+	UtilisateurService userService;
 	
-		@Autowired
-		UtilisateurService userService;
-	
-		@Autowired
-		UtilisateurRepository ur;
+	@Autowired
+	UtilisateurRepository ur;
 	
 	
 	

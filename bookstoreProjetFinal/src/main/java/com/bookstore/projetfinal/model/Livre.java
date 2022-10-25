@@ -27,28 +27,10 @@ public class Livre {
 	private Double prix;
 	
 	
-	
-	public Livre() {
-	}
-
-	
-
-	public Livre(Integer id, String titre, String description, Double prix, Long qte, List<CommandeLivre> commandes,
-			Genre genre, Auteur auteur) {
-		this.id = id;
-		this.titre = titre;
-		this.description = description;
-		this.prix = prix;
-		this.qte = qte;
-		this.commandes = commandes;
-		this.genre = genre;
-		this.auteur = auteur;
-	}
-
-
-
 	@Column(name = "qte_stock")
-	private Long qte;
+	private Integer qte;
+	
+	
 	@OneToMany(mappedBy = "livre")
 	@JsonIgnoreProperties("livre")
 	private List<CommandeLivre> commandes;
@@ -65,6 +47,26 @@ public class Livre {
 	private Auteur auteur;
 
 
+	
+
+	public Livre() {
+	}
+
+	
+
+	public Livre(Integer id, String titre, String description, Double prix, Integer qte, List<CommandeLivre> commandes,
+			Genre genre, Auteur auteur) {
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.qte = qte;
+		this.commandes = commandes;
+		this.genre = genre;
+		this.auteur = auteur;
+	}
+
+	
 	public Integer getId() {
 		return id;
 	}
@@ -125,12 +127,12 @@ public class Livre {
 	}
 
 
-	public Long getQte() {
+	public Integer getQte() {
 		return qte;
 	}
 
 
-	public void setQte(Long qte) {
+	public void setQte(Integer qte) {
 		this.qte = qte;
 	}
 

@@ -1,6 +1,6 @@
 package com.bookstore.projetfinal.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,21 +22,15 @@ public class Commande {
         
         private Boolean confirme;
         
-        private LocalDate dateCreation;
+        private LocalDateTime dateCreation;
         
-               
         public Commande() {}
-
-
         
 		public Commande(Integer id, Boolean confirme, Client client) {
 			this.id = id;
 			this.confirme = confirme;
 			this.client = client;
-		
 		}
-
-
 
 		@ManyToOne 
         @JoinColumn (name = "id_client")
@@ -69,12 +63,12 @@ public class Commande {
 		}
 
 
-		public LocalDate getDateCreation() {
+		public LocalDateTime getDateCreation() {
 			return dateCreation;
 		}
 
 
-		public void setDateCreation(LocalDate dateCreation) {
+		public void setDateCreation(LocalDateTime dateCreation) {
 			this.dateCreation = dateCreation;
 		}
 
@@ -96,6 +90,12 @@ public class Commande {
 
 		public void setLivres(List<CommandeLivre> livres) {
 			this.livres = livres;
+		}
+
+		@Override
+		public String toString() {
+			return "Commande [id=" + id + ", confirme=" + confirme + ", dateCreation=" + dateCreation + ", client="
+					+ client + ", livres=" + livres + "]";
 		}
         
         

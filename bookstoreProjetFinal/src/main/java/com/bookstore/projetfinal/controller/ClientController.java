@@ -23,9 +23,6 @@ import com.bookstore.projetfinal.model.Client;
 import com.bookstore.projetfinal.model.exception.EntityNotFoundException;
 import com.bookstore.projetfinal.service.ClientService;
 
-
-
-
 @RestController
 @RequestMapping("/client")
 @CrossOrigin
