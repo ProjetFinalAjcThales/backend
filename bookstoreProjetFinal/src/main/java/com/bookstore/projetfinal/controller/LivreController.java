@@ -1,12 +1,14 @@
 package com.bookstore.projetfinal.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import javax.management.relation.RelationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,25 +28,26 @@ import com.bookstore.projetfinal.service.LivreService;
 
 
 
-
-
-
 @RestController
 @RequestMapping("/api/livre")
+@CrossOrigin
 public class LivreController {
 
 	@Autowired
 	LivreService ls;
 
+	List<Livre> livres = new ArrayList<Livre>();
+	
 	//methode pour consulter l'ensemble des livres/
 	@GetMapping
-	private List<Livre> consulterLesLivre(@RequestParam(required=false) String sortBy) {
-		//if(Objects.isNull(sortBy))
-		return ls.getAllLivres();
+	private List<Livre> consulterLesLivre() {
+		livres = ls.getAllLivres();
+		return livres;
 		
-//		else
-//			return ls.getLivresSortBy(sortBy);
+
 	}
+	
+	
 	
 	//pour acceder à un livre par son identifiant et acces à l'objet livre
 	@GetMapping("/{id}")
@@ -89,6 +92,62 @@ public class LivreController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
+	
+	 //ici on fait recherche par le titre du livre qu'on souhaite voir
+	@GetMapping("/bytitre")
+	public List<Livre> rechercheByTitreLivre(@RequestParam(required = false) String search) {
+		System.out.println(search);
+		if (search == null)
+			return livres;
+		System.out.println(livres);
+
+		List<Livre> listeLivreByTitre = new ArrayList<>();
+
+		for (Livre l : livres) {
+			if (l.getTitre().toLowerCase().contains(search.toLowerCase())) {
+					
+				listeLivreByTitre.add(l);
+			}
+		}
+		return listeLivreByTitre;
+	}
+	
+	//pour une recherche par le nom ou le prenom de l'auteur
+	@GetMapping("/byauteur")
+	public List<Livre> rechercheByAuteurLivre(@RequestParam(required = false) String search) {
+		System.out.println(search);
+		if (search == null)
+			return livres;
+		System.out.println(livres);
+
+		List<Livre> listeLivreByAuteur = new ArrayList<>();
+
+		for (Livre l : livres) {
+			if (l.getAuteur().getNom().toLowerCase().contains(search.toLowerCase())
+					|| l.getAuteur().getPrenom().toLowerCase().contains(search.toLowerCase())) {
+				listeLivreByAuteur.add(l);
+			}
+		}
+		return listeLivreByAuteur;
+	}
+	
+	//pour une recherche selon le genre du livre
+		@GetMapping("/bygenre")
+		public List<Livre> rechercheByGenreLivre(@RequestParam(required = false) String search) {
+			System.out.println(search);
+			if (search == null)
+				return livres;
+			System.out.println(livres);
+
+			List<Livre> listeLivreByGenre = new ArrayList<>();
+
+			for (Livre l : livres) {
+				if (l.getGenre().getNom().toLowerCase().contains(search.toLowerCase())) {
+					listeLivreByGenre.add(l);
+				}
+			}
+			return listeLivreByGenre;
+		}
 	
 	
 

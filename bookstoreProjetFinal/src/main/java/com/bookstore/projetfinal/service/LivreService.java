@@ -20,10 +20,6 @@ import com.bookstore.projetfinal.repository.LivreRepository;
 
 
 
-
-
-
-
 @Service
 public class LivreService {
 	@Autowired
@@ -98,22 +94,22 @@ public class LivreService {
 
 	}
 	
-	public List<Livre> getLivresSortBy(String paramClassement){
-		String param = "";
-		switch (paramClassement) {
-		case "genre":
-			param = "genre";
-			break;
-		case "auteur":
-			param = "auteur";
-		break;
-		
-		default:
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paramètre de tri inconnu");
-		}
-		Sort s = Sort.by(Sort.Direction.ASC,param) ;
-		return lr.findAll(s);
-	}
+//	public List<Livre> getLivresSortBy(String paramClassement){
+//		String param = "";
+//		switch (paramClassement) {
+//		case "genre":
+//			param = "genre";
+//			break;
+//		case "auteur":
+//			param = "auteur";
+//		break;
+//		
+//		default:
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Paramètre de tri inconnu");
+//		}
+//		Sort s = Sort.by(Sort.Direction.ASC,param) ;
+//		return lr.findAll(s);
+//	}
 	
 
 	//ici on a les verifications qu'on fait avant insertion en base
