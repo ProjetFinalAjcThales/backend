@@ -27,7 +27,6 @@ public class CommandeLivre {
         @MapsId("idLivre")
         @JoinColumn(name="id_livre")
         @JsonIgnoreProperties("commandes")
-       
         private Livre livre;
         
         private Integer qte;
