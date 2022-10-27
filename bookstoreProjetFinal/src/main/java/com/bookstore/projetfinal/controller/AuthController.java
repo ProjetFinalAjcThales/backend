@@ -1,9 +1,12 @@
 package com.bookstore.projetfinal.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,39 +36,39 @@ public class AuthController {
 	 */
 	@PostMapping("/register")
 	public Utilisateur register(@RequestBody UtilisateurClient uc) {
+		System.out.println(uc.getMail());
+		if((uc.getMail() == "")|| (uc.getMdp() == "") ||(uc.getPrenom() == "") || (uc.getNom() == ""))
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Veuillez remplir tous les champs.");
 		if (utilisateurRepo.findFirstByMail(uc.getMail()).isPresent())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce mail existe déjà.");
-		// uc.setMdp(pe.encode(uc.getMdp()));
-
+		
 		return clientService.create(uc);
 	}
 	
 	/*
-	 * Connexion d'un utilisateur
-	 * Renvoie le client correspondant
+	 * Connexion d'un utilisateur Renvoie le client correspondant
 	 */
-	@GetMapping("/connexion")
-	public Client connect(@RequestBody UtilisateurClient uc) {
+	@CrossOrigin
+	@GetMapping("/connexion/{mail}/{mdp}")
+	public Client findByMailAndPass(@PathVariable(name = "mail") String mail, @PathVariable(name = "mdp") String mdp) {
+		if((mail == "")|| (mdp == ""))
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Veuillez remplir tous les champs.");
 		// si aucun mail est dans la bdd => erreur
-		if(!utilisateurRepo.findFirstByMail(uc.getMail()).isPresent())
+		if (!utilisateurRepo.findFirstByMail(mail).isPresent())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Aucun mail correspondant n'a été trouvé.");
-		
+
 		// je récupère l'utilisateur selon le mail fourni
-		Utilisateur utilisateurBdd = utilisateurRepo.findFirstByMail(uc.getMail()).get();
+		Utilisateur utilisateurBdd = utilisateurRepo.findFirstByMail(mail).get();
 		Client clientBdd = clientService.findById(utilisateurBdd.getClient().getId()).get();
 		
-		// je compare le mdp fourni avec le mdp de l'utilisateur dans la bdd 
-		if(!uc.getMdp().equals(utilisateurBdd.getMdp()))
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Le mot de passe ne correspond pas à celui en base de données.");
+		
+		// je compare le mdp fourni avec le mdp de l'utilisateur dans la bdd
+		if (!mdp.equals(utilisateurBdd.getMdp()))
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+					"Le mot de passe ne correspond pas à celui en base de données.");
 		return clientBdd;
+
 	}
-	
-	
-	
-	
-	
-	
-	
 
 	// POUR PLUS TARD SI ON A LE TEMPS DE METTRE LA SCURITÉ
 //	/*
