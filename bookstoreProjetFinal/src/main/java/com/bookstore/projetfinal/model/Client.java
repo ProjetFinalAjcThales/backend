@@ -138,4 +138,13 @@ public class Client {
 		this.utilisateur = utilisateur;
 	}
 
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", ville=" + ville
+				+ ", codePostal=" + codePostal + ", createdAt=" + createdAt + ", commandes=" + commandes
+				+ ", utilisateur=" + utilisateur + "]";
+	}
+	
+	
+
 }

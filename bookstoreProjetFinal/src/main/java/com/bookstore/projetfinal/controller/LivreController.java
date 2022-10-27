@@ -112,24 +112,25 @@ public class LivreController {
 		return listeLivreByTitre;
 	}
 	
-	//pour une recherche par le nom ou le prenom de l'auteur
+	//pour une recherche par le nom ou le prenom de l'auteur ou le titre d'un livre
 	@GetMapping("/byauteur")
-	public List<Livre> rechercheByAuteurLivre(@RequestParam(required = false) String search) {
-		System.out.println(search);
-		if (search == null)
-			return livres;
-		System.out.println(livres);
+    public List<Livre> rechercheByAuteurLivre(@RequestParam(required = false) String search) {
+            System.out.println(search);
+            if (search == null)
+                    return livres;
+            System.out.println(livres);
 
-		List<Livre> listeLivreByAuteur = new ArrayList<>();
+            List<Livre> listeLivreByAuteur = new ArrayList<>();
 
-		for (Livre l : livres) {
-			if (l.getAuteur().getNom().toLowerCase().contains(search.toLowerCase())
-					|| l.getAuteur().getPrenom().toLowerCase().contains(search.toLowerCase())) {
-				listeLivreByAuteur.add(l);
-			}
-		}
-		return listeLivreByAuteur;
-	}
+            for (Livre l : livres) {
+                    if (l.getAuteur().getNom().toLowerCase().contains(search.toLowerCase())
+                                    || l.getAuteur().getPrenom().toLowerCase().contains(search.toLowerCase())
+                                    || l.getTitre().toLowerCase().contains(search.toLowerCase())) {
+                            listeLivreByAuteur.add(l);
+                    }
+            }
+            return listeLivreByAuteur;
+    }
 	
 	//pour une recherche selon le genre du livre
 		@GetMapping("/bygenre")

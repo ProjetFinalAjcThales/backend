@@ -31,11 +31,11 @@ public class ClientController {
 
 	// UPDATE client
 	@PutMapping
-	public void update(@RequestBody Client client) {
+	public Client update(@RequestBody Client client) {
 		// Vérifier que l'id du client existe dans la BDD
 		if (Objects.isNull(client.getId()) || clientService.findById(client.getId()).isEmpty())
 			throw EntityNotFoundException.responseStatus(Client.class, client.getId());
-		clientService.update(client);
+		return clientService.update(client);
 	}
 
 	// Get Client By ID
