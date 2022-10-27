@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @SequenceGenerator(name = "commande_gen", sequenceName = "commande_seq", initialValue = 100, allocationSize = 1)
 public class Commande {
+	
         @Id
         @GeneratedValue(generator = "commande_gen")
         private Integer id;

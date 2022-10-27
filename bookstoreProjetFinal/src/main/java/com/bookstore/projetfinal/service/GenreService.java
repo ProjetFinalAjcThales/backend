@@ -33,7 +33,6 @@ public class GenreService {
 	public Genre createGenre(Genre genre) {
 		if (genre.getId() != null && gr.findById(genre.getId()).isPresent())
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Le genre existe déjà");
-		System.out.println("test");
 		return gr.save(genre);
 	}
 
